@@ -7,7 +7,7 @@ const teluguTextSpan = document.getElementById('teluguText');
 const devanagariTextSpan = document.getElementById('devanagariText');
 let currentStream = null;
 
-async function startCamera(facingMode = 'user') {
+async function startCamera(facingMode = 'environment') { // Changed default to 'environment'
     // Stop any existing stream
     if (currentStream) {
         currentStream.getTracks().forEach(track => track.stop());
@@ -128,5 +128,5 @@ switchCameraBtn.addEventListener('click', () => {
     startCamera(selectedCamera);
 });
 
-// Start with the front camera by default
-window.onload = () => startCamera('user');
+// Start with the back camera by default
+window.onload = () => startCamera('environment'); // Changed from 'user' to 'environment'
