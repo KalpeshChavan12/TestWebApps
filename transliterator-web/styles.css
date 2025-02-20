@@ -15,6 +15,29 @@ h1 {
     color: #333;
 }
 
+.camera-selection {
+    margin: 10px 0;
+}
+
+.camera-selection label {
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+.camera-selection button {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.camera-selection button:hover {
+    background-color: #218838;
+}
+
 video {
     width: 100%;
     max-width: 640px;
