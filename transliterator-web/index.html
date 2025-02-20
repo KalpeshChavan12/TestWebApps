@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telugu to Devanagari Transliterator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Telugu to Devanagari Transliterator</h1>
+        <video id="video" autoplay playsinline></video>
+        <canvas id="canvas" style="display: none;"></canvas>
+        <div class="buttons">
+            <button id="captureBtn">Capture Image</button>
+        </div>
+        <div id="result">
+            <p><strong>Telugu Text:</strong> <span id="teluguText"></span></p>
+            <p><strong>Devanagari Text:</strong> <span id="devanagariText"></span></p>
+        </div>
+    </div>
+    <script src="https://unpkg.com/tesseract.js@4.0.0/dist/tesseract.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
