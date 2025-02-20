@@ -2,16 +2,26 @@
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
 const captureBtn = document.getElementById('captureBtn');
+const switchCameraBtn = document.getElementById('switchCameraBtn');
 const teluguTextSpan = document.getElementById('teluguText');
 const devanagariTextSpan = document.getElementById('devanagariText');
+let currentStream = null;
 
-async function startCamera() {
+async function startCamera(facingMode = 'user') {
+    // Stop any existing stream
+    if (currentStream) {
+        currentStream.getTracks().forEach(track => track.stop());
+    }
+
     try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const stream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: facingMode }
+        });
         video.srcObject = stream;
+        currentStream = stream;
     } catch (error) {
         console.error('Error accessing camera:', error);
-        teluguTextSpan.textContent = 'Camera access denied';
+        teluguTextSpan.textContent = 'Camera access denied or unavailable';
     }
 }
 
@@ -34,7 +44,7 @@ async function processImage(imageData) {
             imageData,
             'tel', // Telugu language code
             {
-                logger: (m) => console.log(m), // Optional: log progress
+                logger: (m) => console.log(m),
             }
         );
         const teluguText = text.trim();
@@ -48,7 +58,7 @@ async function processImage(imageData) {
     }
 }
 
-// Transliteration function (ported from Kotlin)
+// Transliteration function (unchanged)
 function transliterateTeluguToDevanagari(teluguText) {
     const independentVowels = {
         'అ': 'अ', 'ఆ': 'आ', 'ఇ': 'इ', 'ఈ': 'ई', 'ఉ': 'उ', 'ఊ': 'ऊ',
@@ -113,5 +123,10 @@ captureBtn.addEventListener('click', async () => {
     await processImage(imageData);
 });
 
-// Start the camera when the page loads
-window.onload = startCamera;
+switchCameraBtn.addEventListener('click', () => {
+    const selectedCamera = document.querySelector('input[name="camera"]:checked').value;
+    startCamera(selectedCamera);
+});
+
+// Start with the front camera by default
+window.onload = () => startCamera('user');
