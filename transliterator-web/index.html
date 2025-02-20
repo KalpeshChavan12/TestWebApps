@@ -9,6 +9,11 @@
 <body>
     <div class="container">
         <h1>Telugu to Devanagari Transliterator</h1>
+        <div class="camera-selection">
+            <label><input type="radio" name="camera" value="user" checked> Front Camera</label>
+            <label><input type="radio" name="camera" value="environment"> Back Camera</label>
+            <button id="switchCameraBtn">Switch Camera</button>
+        </div>
         <video id="video" autoplay playsinline></video>
         <canvas id="canvas" style="display: none;"></canvas>
         <div class="buttons">
